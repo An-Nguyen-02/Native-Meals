@@ -1,6 +1,20 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Paragraph } from 'react-native-paper';
+import styled from 'styled-components';
+
+const RestaurantCard = styled(Card)`
+  background-color: ${(props) => props.theme.colors.bg.primary};
+`;
+const RestaurantCardCover = styled(Card.Cover)`
+  padding: ${(props) => props.theme.space[3]};
+  background-color: ${(props) => props.theme.colors.bg.primary};
+`;
+const Title = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.body};
+  padding: ${(props) => props.theme.space[3]};
+  color: ${(props) => props.theme.colors.ui.primary};
+`;
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = 'Random Restaurant',
@@ -14,17 +28,11 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     isClosedTemporarily,
   } = restaurant;
   return (
-    <Card elevation={5} style={styles.card}>
-      <Card.Cover key={name} source={{ uri: photos[0] }} style={styles.cover} />
+    <RestaurantCard elevation={5}>
+      <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Card.Content>
-        <Title style={styles.title}>{name}</Title>
+        <Title>{name}</Title>
       </Card.Content>
-    </Card>
+    </RestaurantCard>
   );
 };
-
-const styles = StyleSheet.create({
-  card: { backgroundColor: 'white' },
-  cover: { padding: 10, backgroundColor: 'white' },
-  title: { padding: 5 },
-});

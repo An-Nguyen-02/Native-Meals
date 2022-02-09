@@ -1,5 +1,5 @@
 import React from 'react';
-import { Searchbar } from 'react-native-paper';
+import { List, Searchbar } from 'react-native-paper';
 import {
   StyleSheet,
   Text,
@@ -9,31 +9,31 @@ import {
   StatusBar,
 } from 'react-native';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
-const isAndroid = Platform.OS === 'android';
+import styled from 'styled-components';
+
+const SafeAreaContainer = styled(SafeAreaView)`
+  flex: 1;
+  /* Because status bar only use on Android, do the followed */
+  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
+`;
+const SearchView = styled(View)`
+  justify-content: center;
+  padding: ${(props) => props.theme.space[3]};
+`;
+const ListView = styled(View)`
+  flex: 1;
+  padding: ${(props) => props.theme.space[3]};
+`;
+
 export const RestaurantsScreen = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.search_view}>
+    <SafeAreaContainer>
+      <SearchView>
         <Searchbar placeholder="Search" />
-      </View>
-      <View style={styles.list_view}>
+      </SearchView>
+      <ListView>
         <RestaurantInfoCard />
-      </View>
-    </SafeAreaView>
+      </ListView>
+    </SafeAreaContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: isAndroid ? StatusBar.currentHeight : 0,
-  },
-  search_view: {
-    justifyContent: 'center',
-    padding: 16,
-  },
-  list_view: {
-    flex: 1,
-    padding: 16,
-  },
-});
