@@ -1,0 +1,6 @@
+{
+    "eslint.codeActionsOnSave.rules": [
+        "\"quotes\": [2, \"double\", {\"avoidEscape\":true}]"
+    ],
+    "editor.formatOnSave": true
+}
