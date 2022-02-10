@@ -41,7 +41,7 @@ const SectionEnd = styled(View)`
   flex-direction: row;
   justify-content: flex-end;
 `;
-const RestaurantInfoCard = ({ restaurant = {} }) => {
+export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
     name = 'Random Restaurant',
     icon = 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
@@ -66,15 +66,17 @@ const RestaurantInfoCard = ({ restaurant = {} }) => {
             ))}
           </Rating>
           <SectionEnd>
-            {isClosedTemporarily ? (
+            {isClosedTemporarily && (
               <Text variant="label" style={{ color: 'red' }}>
                 CLOSED TEMPORARILY
               </Text>
-            ) : null}
-            <Spacer variant="left.large" />
-            {isOpenNow ? <SvgXml xml={open} width={20} height={20} /> : null}
-            <Spacer variant="left.large" />
-            <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            )}
+            <Spacer position="left" size="large">
+              {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+            </Spacer>
+            <Spacer position="left" size="large">
+              <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            </Spacer>
           </SectionEnd>
         </Section>
         <Address>{address}</Address>
