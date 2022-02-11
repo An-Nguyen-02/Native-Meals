@@ -13,6 +13,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeArea } from './src/components/safe-area.component';
 import { Ionicons } from '@expo/vector-icons';
+import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context';
 function MapScreen() {
   return (
     <SafeArea>
@@ -58,13 +59,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator screenOptions={IconOptions}>
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <RestaurantsContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator screenOptions={IconOptions}>
+              <Tab.Screen name="Map" component={MapScreen} />
+              <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+              <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantsContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
