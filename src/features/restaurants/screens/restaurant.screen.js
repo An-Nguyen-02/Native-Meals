@@ -11,15 +11,17 @@ const SearchView = styled(View)`
 `;
 
 export const RestaurantsScreen = () => {
-  const restaurantsContext = useContext(RestaurantsContext);
+  const { isLoading, error, restaurants } = useContext(RestaurantsContext);
   return (
     <SafeArea>
       <SearchView>
         <Searchbar placeholder="Search" />
       </SearchView>
       <FlatList
-        data={restaurantsContext.restaurants}
-        renderItem={() => <RestaurantInfoCard />}
+        data={restaurants}
+        renderItem={({ item }) => {
+          return <RestaurantInfoCard restaurant={item} />;
+        }}
         keyExtractor={(item) => item.name}
         contentContainerStyle={{ padding: 16 }}
       />
