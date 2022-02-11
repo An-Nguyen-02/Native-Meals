@@ -64,8 +64,8 @@ export default function App() {
           <RestaurantsContextProvider>
             <NavigationContainer>
               <Tab.Navigator screenOptions={IconOptions}>
-                <Tab.Screen name="Map" component={MapScreen} />
                 <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+                <Tab.Screen name="Map" component={MapScreen} />
                 <Tab.Screen name="Settings" component={SettingsScreen} />
               </Tab.Navigator>
             </NavigationContainer>
