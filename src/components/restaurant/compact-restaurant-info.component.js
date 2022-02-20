@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Image, Platform } from 'react-native';
 import { Text } from '../typography/text.component';
-import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 import { WebView } from 'react-native-webview';
 
@@ -23,8 +22,8 @@ const Item = styled(View)`
 `;
 
 const isAndroid = Platform.OS === 'android';
-export const CompactRestaurantInfo = ({ restaurant }) => {
-  const Image = isAndroid ? CompactWebview : CompactImage;
+export const CompactRestaurantInfo = ({ restaurant, isMap }) => {
+  const Image = isMap && isAndroid ? CompactWebview : CompactImage;
   return (
     <Item>
       <Image source={{ uri: restaurant.photos[0] }} />

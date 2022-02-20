@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { FavoritesContext } from '../../services/favorites/favorites.context';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const FavoriteButton = styled(TouchableOpacity)`
   position: absolute;
   top: 25px;
@@ -16,7 +17,7 @@ export const Favorite = ({ restaurant }) => {
 
   return (
     <FavoriteButton
-      onClick={() =>
+      onPress={() =>
         !isFavorite ? addFavorite(restaurant) : removeFavorite(restaurant)
       }
     >
