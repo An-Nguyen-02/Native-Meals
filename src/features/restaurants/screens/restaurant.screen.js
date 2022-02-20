@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Search } from '../components/search.component';
 import { View, FlatList, TouchableOpacity } from 'react-native';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import { SafeArea } from '../../../components/safe-area.component';
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
 import { ActivityIndicator, Colors } from 'react-native-paper';
+import { FavoriteBar } from '../../../components/favorite/favorite-bar.component';
 import { FavoritesContext } from '../../../services/favorites/favorites.context';
-
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
 `;
@@ -19,7 +19,8 @@ const LoadingView = styled(View)`
 `;
 
 export const RestaurantsScreen = ({ navigation }) => {
-  const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+  const { isLoading, restaurants } = useContext(RestaurantsContext);
+  const [isToggled, setisToggled] = useState(false);
   const { favorites } = useContext(FavoritesContext);
   return (
     <SafeArea>
@@ -28,7 +29,11 @@ export const RestaurantsScreen = ({ navigation }) => {
           <Loading size={50} animating={true} color={Colors.purple300} />
         </LoadingView>
       )}
-      <Search />
+      <Search
+        isFavoriteToggled={isToggled}
+        onFavoriteToggle={() => setisToggled(!isToggled)}
+      />
+      {isToggled && <FavoriteBar favorites={favorites} />}
       <FlatList
         data={restaurants}
         renderItem={({ item }) => {
@@ -38,7 +43,10 @@ export const RestaurantsScreen = ({ navigation }) => {
                 navigation.navigate('RestaurantDetails', { restaurant: item })
               }
             >
-              <RestaurantInfoCard restaurant={item} />
+              <RestaurantInfoCard
+                restaurant={item}
+                onDetail={navigation.navigate}
+              />
             </TouchableOpacity>
           );
         }}
