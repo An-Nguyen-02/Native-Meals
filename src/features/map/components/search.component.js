@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Searchbar } from 'react-native-paper';
 import { View } from 'react-native';
@@ -6,6 +6,10 @@ import { LocationContext } from '../../../services/location/location.context';
 const SearchView = styled(View)`
   justify-content: center;
   padding: ${(props) => props.theme.space[3]};
+  position: absolute;
+  top: 40px;
+  z-index: 100;
+  width: 100%;
 `;
 
 export const Search = () => {
@@ -25,6 +29,7 @@ export const Search = () => {
         onChangeText={(text) => {
           setSearchKeyword(text);
         }}
+        icon="map"
       />
     </SearchView>
   );

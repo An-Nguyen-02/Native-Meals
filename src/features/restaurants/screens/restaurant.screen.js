@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { Search } from '../components/search.component';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, TouchableOpacity } from 'react-native';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import styled from 'styled-components';
 import { SafeArea } from '../../../components/safe-area.component';
 import { RestaurantsContext } from '../../../services/restaurants/restaurants.context';
 import { ActivityIndicator, Colors } from 'react-native-paper';
+import { FavoritesContext } from '../../../services/favorites/favorites.context';
 
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
@@ -17,8 +18,9 @@ const LoadingView = styled(View)`
   left: 50%;
 `;
 
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+  const { favorites } = useContext(FavoritesContext);
   return (
     <SafeArea>
       {isLoading && (
@@ -30,7 +32,15 @@ export const RestaurantsScreen = () => {
       <FlatList
         data={restaurants}
         renderItem={({ item }) => {
-          return <RestaurantInfoCard restaurant={item} />;
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('RestaurantDetails', { restaurant: item })
+              }
+            >
+              <RestaurantInfoCard restaurant={item} />
+            </TouchableOpacity>
+          );
         }}
         keyExtractor={(item) => item.name}
         contentContainerStyle={{ padding: 16 }}
