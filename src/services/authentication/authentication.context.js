@@ -40,6 +40,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         setError(null);
       });
   };
+
   const onRegister = (email, password, repeatedPassword) => {
     setIsLoading(true);
     if (password !== repeatedPassword) {
