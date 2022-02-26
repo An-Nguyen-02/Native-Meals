@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Search } from '../components/search.component';
-import { View, FlatList, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { RestaurantInfoCard } from '../components/restaurant-info-card.component';
 import styled from 'styled-components';
 import { SafeArea } from '../../../components/safe-area.component';
@@ -9,6 +9,7 @@ import { ActivityIndicator, Colors } from 'react-native-paper';
 import { FavoriteBar } from '../../../components/favorite/favorite-bar.component';
 import { FavoritesContext } from '../../../services/favorites/favorites.context';
 import { RestaurantList } from '../components/restaurant-list.styles';
+import { FadeInView } from '../../../components/animations/fade.animation';
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
 `;
@@ -46,10 +47,12 @@ export const RestaurantsScreen = ({ navigation }) => {
                 navigation.navigate('RestaurantDetails', { restaurant: item })
               }
             >
-              <RestaurantInfoCard
-                restaurant={item}
-                onDetail={navigation.navigate}
-              />
+              <FadeInView>
+                <RestaurantInfoCard
+                  restaurant={item}
+                  onDetail={navigation.navigate}
+                />
+              </FadeInView>
             </TouchableOpacity>
           );
         }}
