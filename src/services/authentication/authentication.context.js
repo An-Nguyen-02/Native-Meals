@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -27,7 +27,18 @@ export const AuthenticationContextProvider = ({ children }) => {
       setError('Error: Password does not match');
       return;
     }
-    firebase.auth().createUserWithEmailAndPassword(email, password);
+    setIsLoading(true);
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((u) => {
+        setUser(u);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        setError(error.toString());
+      });
   };
   return (
     <AuthenticationContext.Provider
