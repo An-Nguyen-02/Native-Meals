@@ -8,6 +8,7 @@ import { RestaurantsContext } from '../../../services/restaurants/restaurants.co
 import { ActivityIndicator, Colors } from 'react-native-paper';
 import { FavoriteBar } from '../../../components/favorite/favorite-bar.component';
 import { FavoritesContext } from '../../../services/favorites/favorites.context';
+import { RestaurantList } from '../components/restaurant-list.styles';
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
 `;
@@ -36,7 +37,7 @@ export const RestaurantsScreen = ({ navigation }) => {
       {isToggled && (
         <FavoriteBar favorites={favorites} onDetail={navigation.navigate} />
       )}
-      <FlatList
+      <RestaurantList
         data={restaurants}
         renderItem={({ item }) => {
           return (
