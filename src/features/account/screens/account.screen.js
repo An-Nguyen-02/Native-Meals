@@ -5,11 +5,14 @@ import {
   AccountCover,
   AccountContainer,
   AuthButton,
+  Title,
 } from '../components/account.styles';
+
 export const AccountScreen = ({ navigation }) => {
   return (
     <AccountBackground>
       <AccountCover />
+      <Title>Native Meals</Title>
       <AccountContainer>
         <AuthButton
           icon="login"
