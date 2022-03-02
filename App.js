@@ -3,6 +3,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './src/infrastructure/theme';
 import 'react-native-gesture-handler';
+
 import {
   useFonts as useOswald,
   Oswald_400Regular,
