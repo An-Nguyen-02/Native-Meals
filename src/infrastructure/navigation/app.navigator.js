@@ -7,6 +7,8 @@ import { RestaurantsContextProvider } from '../../services/restaurants/restauran
 import { LocationContextProvider } from '../../services/location/location.context';
 import { FavoritesContextProvider } from '../../services/favorites/favorites.context';
 import { SettingsNavigator } from './settings.navigator';
+import { CheckoutScreen } from '../../features/checkout/screens/checkout.screen';
+import { CartContextProvider } from '../../services/cart/cart.context';
 
 const Tab = createBottomTabNavigator();
 const IconOptions = ({ route }) => ({
@@ -20,6 +22,8 @@ const IconOptions = ({ route }) => ({
       iconName = focused ? 'settings' : 'settings-outline';
     } else if (route.name === 'Restaurants') {
       iconName = focused ? 'restaurant' : 'restaurant-outline';
+    } else if (route.name === 'Checkout') {
+      iconName = focused ? 'cart' : 'cart-outline';
     }
     return <Ionicons name={iconName} size={size} color={color} />;
   },
@@ -32,11 +36,14 @@ export const AppNavigator = () => {
     <FavoritesContextProvider>
       <LocationContextProvider>
         <RestaurantsContextProvider>
-          <Tab.Navigator screenOptions={IconOptions}>
-            <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Settings" component={SettingsNavigator} />
-          </Tab.Navigator>
+          <CartContextProvider>
+            <Tab.Navigator screenOptions={IconOptions}>
+              <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+              <Tab.Screen name="Map" component={MapScreen} />
+              <Tab.Screen name="Checkout" component={CheckoutScreen} />
+              <Tab.Screen name="Settings" component={SettingsNavigator} />
+            </Tab.Navigator>
+          </CartContextProvider>
         </RestaurantsContextProvider>
       </LocationContextProvider>
     </FavoritesContextProvider>
