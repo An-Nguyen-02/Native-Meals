@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RestaurantsNavigator } from './restaurants.navigator';
 import React from 'react';
 import { MapScreen } from '../../features/map/screen/map.screen';
+import { CheckoutScreen } from '../../features/checkout/screen/checkout.screen';
 import { RestaurantsContextProvider } from '../../services/restaurants/restaurants.context';
 import { LocationContextProvider } from '../../services/location/location.context';
 import { FavoritesContextProvider } from '../../services/favorites/favorites.context';
@@ -20,6 +21,8 @@ const IconOptions = ({ route }) => ({
       iconName = focused ? 'settings' : 'settings-outline';
     } else if (route.name === 'Restaurants') {
       iconName = focused ? 'restaurant' : 'restaurant-outline';
+    } else if (route.name === 'Checkout') {
+      iconName = focused ? 'cart' : 'cart-outline';
     }
     return <Ionicons name={iconName} size={size} color={color} />;
   },
@@ -34,6 +37,7 @@ export const AppNavigator = () => {
         <RestaurantsContextProvider>
           <Tab.Navigator screenOptions={IconOptions}>
             <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+            <Tab.Screen name="Checkout" component={CheckoutScreen} />
             <Tab.Screen name="Map" component={MapScreen} />
             <Tab.Screen name="Settings" component={SettingsNavigator} />
           </Tab.Navigator>
