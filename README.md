@@ -16,10 +16,18 @@ My purpose is to study from this the basic concept of building a full functional
 - Use Firestore to have information of shops
 - Used Hook and Context Provider for scalability.
 
-## How to use
+## How to use as developer
 
 - Clone the project using `git clone https://github.com/An-Nguyen-02/Native-Meals.git`
 - Then remove the origin by `git remote remove origin`
-- Then set a `.runtimeconfig.json` file in the function directory and add in the google.key with stripe.key which link to your stripe account.
+- Then set a `.runtimeconfig.json` file in the function directory and add in the google.key (your google cloud app key) with stripe.key which link to your stripe account.
 - Then run `npm install` to have all the packages
 - Then run `npm start`. Enjoy :smiley: .
+
+## How to use as client
+- You must use an Android device for this (it can be a simulator). Download Expo Go app from Google Play
+- Go to: [This link](https://expo.dev/@an_nguyen/MealsToGo?release-channel=default) on your computer and scan the QR code. The application will open in your Expo Go
+- You can use this credential for testing purpose: 
+  + Email: test@gmail.com
+  + Password: test123
+- Enjoy :smiley:
