@@ -31,3 +31,6 @@ My purpose is to study from this the basic concept of building a full functional
   + Email: test@gmail.com
   + Password: test123
 - Enjoy :smiley:
+
+## Note
+- Because I use SDK 44, which is currently deprecated, the app is not working. I'm fixing it
